@@ -47,7 +47,7 @@ hr {
 
 </style>
     <head>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     </head>
 <body>
@@ -56,7 +56,7 @@ hr {
   <div class="middle">
     <h1>Enter your handle:</h1>
       <div class="container">
-        <form class="form-inline" id="formID">
+        <form class="form-inline" i="formID">
         <div class="form-group">
       <label for="email"></label>
       <input type="email" class="form-control" id="email" placeholder="Enter handle" name="email">
@@ -73,31 +73,15 @@ hr {
 
 </body>
 <script>
-   function loadDoc() {
-      var xhttp;
-      xhttp=new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          console.log(this);
-        }
-      };
-      xhttp.open("GET", "https://hymkbthcl9.execute-api.us-east-1.amazonaws.com/v1/", true);
-      xhttp.send();
-}
-    
-     function loadDoc() {
-        var form = document.getElementById('formID');
-          var xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-                    console.log('in loaddoc');
 
-            if (this.status == 200) {
-                console.log(this.responseText);
-            }
-          };
-          xhttp.open("POST", "https://hymkbthcl9.execute-api.us-east-1.amazonaws.com/v1/", true);
-          xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          xhttp.send("fname=Henry&lname=Ford");
-    }
+  
+$.ajax({url:'https://hymkbthcl9.execute-api.us-east-1.amazonaws.com/v1/',
+             type:"POST",
+             crossDomain:true,
+             dataType:"json",
+             success:function(data, textStatus, jqXHR) {alert("success");},
+             error: function(jqXHR, textStatus, errorThrown) {alert(errorThrown);}
+    });
+         
 </script>
 </html>
