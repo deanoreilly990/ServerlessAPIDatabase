@@ -48,7 +48,22 @@ hr {
 </style>
     <head>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
 
+$(document).ready(function(){
+      $("button").click(function(){
+        $.ajax({url:'https://hymkbthcl9.execute-api.us-east-1.amazonaws.com/v1/',
+                 type:"POST",
+                 crossDomain:true,
+                 dataType:"json",
+                 success:function(data, textStatus, jqXHR) {alert(data);},
+                 error: function(jqXHR, textStatus, errorThrown) {alert(errorThrown);}
+        });
+      });
+});
+
+         
+</script>
     </head>
 <body>
 
@@ -61,7 +76,7 @@ hr {
       <label for="email"></label>
       <input type="email" class="form-control" id="email" placeholder="Enter handle" name="email">
     </div>
-            <button type="submit" class="btn btn-default" onclick="loadDoc()">Submit</button>
+            <button type="submit"class="btn btn-default" id='btn1'>Submit</button>
           </form>
     <hr>
   </div>
@@ -72,16 +87,5 @@ hr {
 </div>
 
 </body>
-<script>
 
-  
-$.ajax({url:'https://hymkbthcl9.execute-api.us-east-1.amazonaws.com/v1/',
-             type:"POST",
-             crossDomain:true,
-             dataType:"json",
-             success:function(data, textStatus, jqXHR) {alert("success");},
-             error: function(jqXHR, textStatus, errorThrown) {alert(errorThrown);}
-    });
-         
-</script>
 </html>
