@@ -24,6 +24,12 @@
   
 
 }
+.top{
+    visibility: hidden;
+    top:10%;
+    transform: translate(-50%, -50%);
+    text-align: center;  
+    }
 
 .bottomleft {
   position: absolute;
@@ -33,6 +39,7 @@
 }
 
 .middle {
+  visibility: visible;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -58,6 +65,8 @@ $(document).ready(function(){
                  dataType:"json",
                  success:function(data, textStatus, jqXHR) {
                         $(".bgimg").css("background-image", "url('images/jordan-412637-unsplash.jpg')");
+                        $(".middle").css("top","10%");
+                        $("h1").text(data);
 
                  },
                  error: function(jqXHR, textStatus, errorThrown) {alert(errorThrown);}
@@ -69,6 +78,7 @@ $(document).ready(function(){
 </script>
     </head>
 <body>
+    
 
 <div class="bgimg">
   <div class="middle">
