@@ -51,12 +51,15 @@ hr {
         <script>
 
 $(document).ready(function(){
-      $("button").submit(function(){
+      $("button").click(function(){
           $.ajax({url:'https://hymkbthcl9.execute-api.us-east-1.amazonaws.com/v1/',
                  type:"POST",
                  crossDomain:true,
                  dataType:"json",
-                 success:function(data, textStatus, jqXHR) {alert(data);},
+                 success:function(data, textStatus, jqXHR) {
+                        $(".bgimg").css("background-image", "url('images/jordan-412637-unsplash.jpg')");
+
+                 },
                  error: function(jqXHR, textStatus, errorThrown) {alert(errorThrown);}
         });
     });
@@ -76,8 +79,9 @@ $(document).ready(function(){
       <label for="email"></label>
       <input type="email" class="form-control" id="email" placeholder="Enter handle" name="email">
     </div>
-            <button type="submit"class="btn btn-default" id='btn1'>Submit</button>
         </form>
+            <button type="submit"class="btn btn-default" id='btn1'>Submit</button>
+
             
     <hr>
   </div>
