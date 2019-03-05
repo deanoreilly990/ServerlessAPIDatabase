@@ -63,13 +63,17 @@ $(document).ready(function(){
                  type:"POST",
                  crossDomain:true,
                  dataType:"json",
-                  data:document.getElementById("email").value,
+                 data:document.getElementById("email").value,
                  success:function(data, textStatus, jqXHR) {
-                        $(".bgimg").css("background-image", "url('images/jordan-412637-unsplash.jpg')");
+                        //var json = $.parseJSON(data);
+                        console.log(data)
+                        var name = data['name'];
+                        var title =data['title'];
+                        var nocase = data['nocase'];
+                        $(".bgimg").css("background-image", "url('images/john-cobb-13961-unsplash.jpg')");
                         $(".middle").css("top","10%");
-                        console.log(data);
-                        $("h1").text(data);
-
+                        $("h1").text('Hey ' +name);
+                        $("#photo").text('Photo by John Cobb on Unsplash');
                  },
                  error: function(jqXHR, textStatus, errorThrown) {alert(errorThrown);}
         });
@@ -99,7 +103,7 @@ $(document).ready(function(){
   </div>
       </div>
   <div class="bottomleft">
-    <p>Photo by Paulo Silva on Unsplash</p>
+    <p id="photo">Photo by Paulo Silva on Unsplash</p>
   </div>
 </div>
 
