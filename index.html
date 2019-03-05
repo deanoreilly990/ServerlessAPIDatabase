@@ -25,9 +25,7 @@
 
 }
 .top{
-    visibility: hidden;
-    top:10%;
-    transform: translate(-50%, -50%);
+    top:20%;
     text-align: center;  
     }
 
@@ -51,13 +49,24 @@ hr {
   margin: auto;
   width: 40%;
 }
+.containerData {
+    position: absolute;
+    width: 200px;
+    top: 300px;
+    left: 250px;
+    height: 200px;
+}
 
 </style>
     <head>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
         <script>
 
 $(document).ready(function(){
+        $(".chart-title").hide();
       $("button").click(function(){
           $.ajax({url:'https://hymkbthcl9.execute-api.us-east-1.amazonaws.com/v1/',
                  type:"POST",
@@ -70,10 +79,62 @@ $(document).ready(function(){
                         var name = data['name'];
                         var title =data['title'];
                         var nocase = data['nocase'];
+                        var monday = parseInt(data['Mon']);
+                        var tuesday = parseInt(data['Tue']);
+                        var wednesday = parseInt(data['Wed']);
+                        var thursday =parseInt(data['Thu']);
+                        var friday = parseInt(data['Fri']);
+                        var Lambda = parseInt(data['Lambda']);
+                        var APIGW = parseInt(data['APIGateway']);
+                        var Connect = parseInt(data['AWS Connect'])
+                     var weekdays = ["MON", "TUE", "WED", "THU", "FRI"]
                         $(".bgimg").css("background-image", "url('images/john-cobb-13961-unsplash.jpg')");
-                        $(".middle").css("top","10%");
-                        $("h1").text('Hey ' +name);
+                       // $(".middle").css("top","%");
+                        $(".container").hide();
+                        $("#h1hide").hide();
+
+                        
+                        $("#topdiv").text('Hey ' +name);
+                     
                         $("#photo").text('Photo by John Cobb on Unsplash');
+                        $(".chart-title").show();
+                        new Morris.Line({
+                          // ID of the element in which to draw the chart.
+                          element: 'myfirstchart',
+                          // Chart data records -- each entry in this array corresponds to a point on
+                          // the chart.
+                          data: [
+                            { "period": "2019-03-03", value: monday },
+                            { "period": "2019-03-04", value: tuesday },
+                            { "period": "2019-03-05", value: wednesday },
+                            { "period": "2019-03-06", value: thursday },
+                            { "period": "2019-03-07", value: friday }
+                          ],
+                          // The name of the data record attribute that contains x-values.
+                          xkey: 'period',
+                          // A list of names of data record attributes that contain y-values.
+                          ykeys: ['value'],
+                          // Labels for the ykeys -- will be displayed when you hover over the
+                          // chart.
+                          labels: ['Value'],
+                            xlables: 'day',
+                            xLabelFormat: function(d) {
+                                    return weekdays[d.getDay()];
+                            },
+                            lineColors:['Red'],
+                            gridTextColor:'#FFF',
+                        
+                        });
+                     Morris.Donut({
+                      element: 'donut-example',
+                      data: [
+                        {label: "Lambda", value: Lambda},
+                        {label: "API Gateway", value: APIGW},
+                        {label: "AWS Connect", value: Connect}
+                      ],labelColor: '#fff'
+                    });
+
+                     
                  },
                  error: function(jqXHR, textStatus, errorThrown) {alert(errorThrown);}
         });
@@ -87,8 +148,11 @@ $(document).ready(function(){
     
 
 <div class="bgimg">
+    <div class="top">
+        <h1 id="topdiv"></h1>
+    </div>
   <div class="middle">
-    <h1>Enter your handle:</h1>
+    <h1 id='h1hide'>Enter your handle:</h1>
       <div class="container">
         <form class="form-inline" id="formID">
         <div class="form-group">
@@ -96,11 +160,14 @@ $(document).ready(function(){
       <input type="input" class="form-control" id="email" placeholder="Enter handle" name="email">
     </div>
         </form>
-            <button type="submit"class="btn btn-default" id='btn1'>Submit</button>
-
-            
+            <button type="submit"class="btn btn-default" id='btn1'>Submit</button>   
     <hr>
   </div>
+      <div id="containerData">
+        <div class="chart-title">Cases Handled</div>
+      <div id="myfirstchart" style="height: 200px; width:400px"></div>
+     <div id="donut-example"></div>
+</div>
       </div>
   <div class="bottomleft">
     <p id="photo">Photo by Paulo Silva on Unsplash</p>
