@@ -34,15 +34,31 @@
   left: 10px;
     font-size: 10px;    
 }
+.left{
+        position: absolute;
+        top:40%;
+        left:20%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+}
 
 .middle {
   visibility: visible;
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
 }
+    .right{
+        position: absolute;
+        top:40%;
+        left:75%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+}   
+        
+    }
 
 hr {
   margin: auto;
@@ -68,8 +84,8 @@ $(document).ready(function(){
         $(".chart-title").hide();
         $("#topdiv").hide();
         $("#containerData").hide();
-
-    
+        $(".left").hide();
+        $(".right").hide();
     
       $("button").click(function(){
           $.ajax({url:'https://hymkbthcl9.execute-api.us-east-1.amazonaws.com/v1/',
@@ -100,6 +116,8 @@ $(document).ready(function(){
                         $(".chart-title").show();
                         $("#topdiv").show();
                         $("#containerData").show();
+                        $(".left").show();
+                        $(".right").show();
 
 
                         
@@ -143,7 +161,24 @@ $(document).ready(function(){
                       ],labelColor: '#fff'
                     });
 
-                     
+                     Morris.Bar({
+                          element: 'bar-chart',
+                          data: [
+                            { y: '2006', a: 100, b: 90 },
+                            { y: '2007', a: 75,  b: 65 },
+                            { y: '2008', a: 50,  b: 40 },
+                            { y: '2009', a: 75,  b: 65 },
+                            { y: '2010', a: 50,  b: 40 },
+                            { y: '2011', a: 75,  b: 65 },
+                            { y: '2012', a: 100, b: 90 }
+                          ],
+                          xkey: 'y',
+                          ykeys: ['a', 'b'],
+                          labels: ['Series A', 'Series B'],
+                         horizontal: true,
+                            stacked: true
+                        });
+
                  },
                  error: function(jqXHR, textStatus, errorThrown) {alert(errorThrown);}
         });
@@ -156,8 +191,18 @@ $(document).ready(function(){
 <body>
 <div class="bgimg">
     <div class="top">
+        
         <h1 id="topdiv"></h1>
     </div>
+    
+     <div class="left">
+         <div id="containerData">
+       <label class="label label-success">Cases over days</label>
+      <div id="myfirstchart" style="height: 200px; width:300px"></div>
+         </div>
+    </div>
+         
+         
   <div class="middle">
     <h1 id='h1hide'>Enter your handle:</h1>
       <div class="container">
@@ -171,11 +216,18 @@ $(document).ready(function(){
     <hr>
   </div>
       <div id="containerData">
-        <div class="chart-title">Cases Handled</div>
-      <div id="myfirstchart" style="height: 200px; width:400px"></div>
-     <div id="donut-example"></div>
-</div>
+    <label class="label label-success">Services worked</label>
+     <div id="donut-example"style="height: 200px; width:300px"></div>
+   
+            </div>
       </div>
+    <div class ="right">
+    <div id="containerData">
+        <label class="label label-success">Bar Chart</label>
+        <div id="bar-chart"style="height: 200px; width:300px" ></div>
+    </div>
+    </div>
+    
   <div class="bottomleft">
     <p id="photo">Photo by Paulo Silva on Unsplash</p>
   </div>
