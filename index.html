@@ -19,13 +19,12 @@
 
 .topleft {
   position: absolute;
-  top: 0;
   left: 16px;
   
 
 }
 .top{
-    top:20%;
+    top:300px;
     text-align: center;  
     }
 
@@ -67,6 +66,11 @@ hr {
 
 $(document).ready(function(){
         $(".chart-title").hide();
+        $("#topdiv").hide();
+        $("#containerData").hide();
+
+    
+    
       $("button").click(function(){
           $.ajax({url:'https://hymkbthcl9.execute-api.us-east-1.amazonaws.com/v1/',
                  type:"POST",
@@ -78,6 +82,7 @@ $(document).ready(function(){
                         console.log(data)
                         var name = data['name'];
                         var title =data['title'];
+                        var role = data['title']
                         var nocase = data['nocase'];
                         var monday = parseInt(data['Mon']);
                         var tuesday = parseInt(data['Tue']);
@@ -92,9 +97,13 @@ $(document).ready(function(){
                        // $(".middle").css("top","%");
                         $(".container").hide();
                         $("#h1hide").hide();
+                        $(".chart-title").show();
+                        $("#topdiv").show();
+                        $("#containerData").show();
+
 
                         
-                        $("#topdiv").text('Hey ' +name);
+                        $("#topdiv").html('Hey ' +name +'<br />'+role);
                      
                         $("#photo").text('Photo by John Cobb on Unsplash');
                         $(".chart-title").show();
@@ -145,8 +154,6 @@ $(document).ready(function(){
 </script>
     </head>
 <body>
-    
-
 <div class="bgimg">
     <div class="top">
         <h1 id="topdiv"></h1>
