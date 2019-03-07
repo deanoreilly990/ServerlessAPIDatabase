@@ -36,7 +36,7 @@
 }
 .left{
         position: absolute;
-        top:40%;
+        top:50%;
         left:20%;
         transform: translate(-50%, -50%);
         text-align: center;
@@ -50,9 +50,17 @@
   transform: translate(-50%, -50%);
   text-align: center;
 }
+.middledata {
+  visibility: visible;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
     .right{
         position: absolute;
-        top:40%;
+        top:50%;
         left:75%;
         transform: translate(-50%, -50%);
         text-align: center;
@@ -86,6 +94,7 @@ $(document).ready(function(){
         $("#containerData").hide();
         $(".left").hide();
         $(".right").hide();
+        $(".middledata").hide();
     
       $("button").click(function(){
           $.ajax({url:'https://hymkbthcl9.execute-api.us-east-1.amazonaws.com/v1/',
@@ -118,6 +127,9 @@ $(document).ready(function(){
                         $("#containerData").show();
                         $(".left").show();
                         $(".right").show();
+                         $(".middle").hide();
+                        $(".middledata").show();
+                       
 
 
                         
@@ -198,7 +210,7 @@ $(document).ready(function(){
      <div class="left">
          <div id="containerData">
        <label class="label label-success">Cases over days</label>
-      <div id="myfirstchart" style="height: 200px; width:300px"></div>
+      <div id="myfirstchart" style="height: 300px; width:400px"></div>
          </div>
     </div>
          
@@ -215,16 +227,18 @@ $(document).ready(function(){
             <button type="submit"class="btn btn-default" id='btn1'>Submit</button>   
     <hr>
   </div>
+       </div>
+    <div class="middledata">
       <div id="containerData">
-    <label class="label label-success">Services worked</label>
-     <div id="donut-example"style="height: 200px; width:300px"></div>
-   
-            </div>
-      </div>
+        <label class="label label-success">Services worked</label>
+        <div id="donut-example"style="height: 300px; width:400px"></div>
+        </div>
+    </div>
+     
     <div class ="right">
     <div id="containerData">
         <label class="label label-success">Bar Chart</label>
-        <div id="bar-chart"style="height: 200px; width:300px" ></div>
+        <div id="bar-chart"style="height: 300px; width:400px" ></div>
     </div>
     </div>
     
